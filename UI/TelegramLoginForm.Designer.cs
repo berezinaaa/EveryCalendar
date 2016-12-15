@@ -31,8 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.requestCodeButton = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.codeTextBox = new System.Windows.Forms.TextBox();
+            this.sendCodeButton = new System.Windows.Forms.Button();
             this.phoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
@@ -64,21 +64,24 @@
             this.requestCodeButton.UseVisualStyleBackColor = true;
             this.requestCodeButton.Click += new System.EventHandler(this.requestCodeButton_Click);
             // 
-            // textBox2
+            // codeTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(88, 155);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.codeTextBox.Location = new System.Drawing.Point(88, 155);
+            this.codeTextBox.Name = "codeTextBox";
+            this.codeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.codeTextBox.TabIndex = 4;
+            this.codeTextBox.TextChanged += new System.EventHandler(this.codeTextBox_TextChanged);
+            this.codeTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.codeTextBox_KeyPress);
             // 
-            // button2
+            // sendCodeButton
             // 
-            this.button2.Location = new System.Drawing.Point(88, 181);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Отправить код";
-            this.button2.UseVisualStyleBackColor = true;
+            this.sendCodeButton.Location = new System.Drawing.Point(88, 181);
+            this.sendCodeButton.Name = "sendCodeButton";
+            this.sendCodeButton.Size = new System.Drawing.Size(100, 23);
+            this.sendCodeButton.TabIndex = 5;
+            this.sendCodeButton.Text = "Отправить код";
+            this.sendCodeButton.UseVisualStyleBackColor = true;
+            this.sendCodeButton.Click += new System.EventHandler(this.sendCodeButton_Click);
             // 
             // phoneTextBox
             // 
@@ -94,8 +97,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.phoneTextBox);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.sendCodeButton);
+            this.Controls.Add(this.codeTextBox);
             this.Controls.Add(this.requestCodeButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -112,8 +115,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button requestCodeButton;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox codeTextBox;
+        private System.Windows.Forms.Button sendCodeButton;
         private System.Windows.Forms.MaskedTextBox phoneTextBox;
     }
 }

@@ -13,11 +13,23 @@ namespace UI
 {
     public partial class TelegramLoginForm : Form
     {
+        TelegramManager telegram;
+        Action<bool, string> callback;
+
         public TelegramLoginForm()
         {
             InitializeComponent();
             requestCodeButton.Enabled = false;
-            TelegramManager.GetInstance();
+            sendCodeButton.Enabled = false;
+            telegram = TelegramManager.GetInstance();
+
+            callback = (success, message) =>
+            {
+                if (!success)
+                {
+                    MessageBox.Show(message, "Ошибка");
+                }
+            };
         }
 
         private void TelegramLoginForm_Load(object sender, EventArgs e)
@@ -27,22 +39,36 @@ namespace UI
 
         private void requestCodeButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var phone = phoneTextBox.Text.Replace("-", "");
-                var telegram = TelegramManager.GetInstance();
-                telegram.CodeRequest(phone);
-            } 
-            catch (Exception ex)
-            {
-                MessageBox.Show("Не удалось отправить код на указанный номер", "Ошибка");
-            }
- 
+            var phone = phoneTextBox.Text.Replace("-", "");
+            telegram.CodeRequest(phone, callback);
         }
 
         private void phoneTextBox_TextChanged(object sender, EventArgs e)
         {
             requestCodeButton.Enabled = phoneTextBox.Text.Length == 15;
+        }
+
+        private void sendCodeButton_Click(object sender, EventArgs e)
+        {
+            telegram.Auth(codeTextBox.Text, callback);
+        }
+
+        private void codeTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (codeTextBox.Text.Length == 5 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (!char.IsControl(e.KeyChar) && !char.IsNumber(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void codeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            sendCodeButton.Enabled = codeTextBox.Text.Length == 5;
         }
     }
 }

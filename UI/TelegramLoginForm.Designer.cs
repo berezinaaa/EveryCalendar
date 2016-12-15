@@ -30,10 +30,10 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.requestCodeButton = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.phoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -54,14 +54,15 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Введите полученый код";
             // 
-            // button1
+            // requestCodeButton
             // 
-            this.button1.Location = new System.Drawing.Point(88, 90);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Прислать код";
-            this.button1.UseVisualStyleBackColor = true;
+            this.requestCodeButton.Location = new System.Drawing.Point(88, 90);
+            this.requestCodeButton.Name = "requestCodeButton";
+            this.requestCodeButton.Size = new System.Drawing.Size(100, 23);
+            this.requestCodeButton.TabIndex = 3;
+            this.requestCodeButton.Text = "Прислать код";
+            this.requestCodeButton.UseVisualStyleBackColor = true;
+            this.requestCodeButton.Click += new System.EventHandler(this.requestCodeButton_Click);
             // 
             // textBox2
             // 
@@ -79,22 +80,23 @@
             this.button2.Text = "Отправить код";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // maskedTextBox1
+            // phoneTextBox
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(88, 64);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(100, 20);
-            this.maskedTextBox1.TabIndex = 6;
+            this.phoneTextBox.Location = new System.Drawing.Point(88, 64);
+            this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.Size = new System.Drawing.Size(100, 20);
+            this.phoneTextBox.TabIndex = 6;
+            this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
             // 
             // TelegramLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.phoneTextBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.requestCodeButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "TelegramLoginForm";
@@ -109,9 +111,9 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button requestCodeButton;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox phoneTextBox;
     }
 }

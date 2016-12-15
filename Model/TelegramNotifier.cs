@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TLSharp;
 
 namespace Model
 {
-    public class User
+    public class TelegramNotifier
     {
-        public string Name { get; set; }
-        public string PhoneNumber { get; set; }
+
     }
+
+
 }

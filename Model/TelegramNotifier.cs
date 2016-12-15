@@ -46,11 +46,10 @@ namespace Model
 
         public async void CodeRequest(string phone, Action<bool, string> callback)
         {
-            this.client = new TelegramClient(80415, "96eafd6fc118d9cc520147a841aa5a93");
-            await client.ConnectAsync();
-
             try
             {
+                this.client = new TelegramClient(80415, "96eafd6fc118d9cc520147a841aa5a93");
+                await client.ConnectAsync();
                 this.phone = phone;
                 this.hash = await client.SendCodeRequestAsync(phone);
                 callback(true, null);

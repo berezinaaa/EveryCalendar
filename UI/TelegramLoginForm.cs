@@ -50,6 +50,19 @@ namespace UI
 
         private void sendCodeButton_Click(object sender, EventArgs e)
         {
+            Action<bool, string> callback = (success, message) =>
+            {
+                if (success)
+                {
+                    MainForm form = new MainForm();
+                    form.Show();
+                    this.Close();
+                } 
+                else
+                {
+                    ShowError(message);
+                }
+            };
             telegram.Auth(codeTextBox.Text, callback);
         }
 
@@ -69,6 +82,11 @@ namespace UI
         private void codeTextBox_TextChanged(object sender, EventArgs e)
         {
             sendCodeButton.Enabled = codeTextBox.Text.Length == 5;
+        }
+
+        private void ShowError(string message)
+        {
+            MessageBox.Show(message, "Ошибка");
         }
     }
 }

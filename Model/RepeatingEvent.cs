@@ -11,14 +11,9 @@ namespace Model
         TimeSpan Interval { get; set; }
 
         public RepeatingEvent(
-            string title, 
-            string descr, 
-            TimeSpan start, 
-            TimeSpan end,
-            DateTime day,
-            EventPriority priority,
-            TimeSpan interval): 
-            base(title, descr, start, end, day, priority)
+            string title, string descr, TimeSpan start, TimeSpan end,
+            DateTime day, EventPriority priority, TimeSpan interval, List<IEventNotifier> notifiers): 
+            base(title, descr, start, end, day, priority,  notifiers)
         {
             Interval = interval;
         }

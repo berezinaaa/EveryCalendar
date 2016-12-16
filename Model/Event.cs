@@ -24,8 +24,12 @@ namespace Model
         public TimeSpan EndTime { get; set; }
         public DateTime Day { get; set; }
         public EventPriority Priority { get; set; }
+        public List<IEventNotifier> Notifiers { get; set; }
 
-        public Event(string title, string descr, TimeSpan start, TimeSpan end, DateTime day, EventPriority priority)
+        private bool isNotified;
+
+        public Event(string title, string descr, TimeSpan start, TimeSpan end, DateTime day,
+                     EventPriority priority, List<IEventNotifier> notifiers)
         {
             Title = title;
             Description = descr;
@@ -33,7 +37,9 @@ namespace Model
             EndTime = end;
             Day = day;
             Priority = priority;
+            Notifiers = notifiers;
         }
+
         public EventDataSource DataSource() {
             return new EventDataSource(this);
         }
@@ -43,6 +49,27 @@ namespace Model
             get
             {
                 return "Время " + StartTime + ". Начинается событие " + Title;
+            }
+        }
+
+        public bool ShouldNotify
+        {
+            get
+            {
+                var now = DateTime.Now;
+                return now.Date == this.Day.Date &&
+                    now.TimeOfDay >= this.StartTime &&
+                    now.TimeOfDay <= this.EndTime &&
+                    !isNotified;
+            }
+        }
+
+        public void Notify()
+        {
+            isNotified = true;
+            foreach (IEventNotifier notifier in Notifiers)
+            {
+                notifier.Notify(this);
             }
         }
     }

@@ -8,6 +8,6 @@ namespace Model
 {
     public interface IEventNotifier
     {
-        void Notify();
+        void Notify(Event calendarEvent);
     }
 }

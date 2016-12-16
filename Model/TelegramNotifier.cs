@@ -11,7 +11,11 @@ namespace Model
 {
     public class TelegramNotifier
     {
-
+        void Notify(Event calendarEvent)
+        {
+            var telegram = TelegramManager.GetInstance();
+            telegram.SendMessage(calendarEvent.NotificationMessage);
+        }
     }
 
     public class TelegramManager

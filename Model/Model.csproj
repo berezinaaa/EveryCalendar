@@ -81,9 +81,9 @@
     <Compile Include="EventContext.cs" />
     <Compile Include="IEventNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepeatingEvent.cs" />
     <Compile Include="SmsNotifier.cs" />
     <Compile Include="TelegramNotifier.cs" />
-    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

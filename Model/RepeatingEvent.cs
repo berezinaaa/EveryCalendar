@@ -10,6 +10,8 @@ namespace Model
     {
         TimeSpan Interval { get; set; }
 
+        public RepeatingEvent() { }
+
         public RepeatingEvent(
             string title, string descr, TimeSpan start, TimeSpan end,
             DateTime day, EventPriority priority, TimeSpan interval, List<IEventNotifier> notifiers): 

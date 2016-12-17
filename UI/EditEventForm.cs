@@ -55,7 +55,7 @@ namespace UI
             ev.Title = titleTextBox.Text;
             ev.StartTime = startTimePicker.Value.TimeOfDay;
             ev.EndTime = endTimePicker.Value.TimeOfDay;
-            ev.Day = dayPicker.Value;
+            ev.Day = dayPicker.Value.Date;
             ev.Description = descriptionTextBox.Text;
             
             switch(priorityComboBox.SelectedIndex)
@@ -76,10 +76,8 @@ namespace UI
             {
                 context.Add(ev);
             }
-            else
-            {
-                context.SaveChanges();
-            }
+
+            this.Close();
             
             //TODO: notifications 
         }

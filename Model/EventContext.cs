@@ -56,10 +56,19 @@ namespace Model
 
         public List<Event> EventsForDate(DateTime date)
         {
-            var result = from ev in events
-                         where ev.Day.Date == date
-                         select ev;
-            return result.OrderBy(ev => ev.StartTime).ToList();
+            try
+            {
+                var result = from ev in events
+                             where ev.Day == date
+                             select ev;
+
+                return result.OrderBy(ev => ev.StartTime).ToList();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.InnerException);
+                return null;
+            }
         }
     }
 }

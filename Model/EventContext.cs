@@ -54,6 +54,20 @@ namespace Model
             }
         }
 
+        public Dictionary<DateTime, List<Event>> WeekEventsFromStartDate(DateTime startDay)
+        {
+            var day = startDay;
+
+            var result = new Dictionary<DateTime, List<Event>>();
+            for (int i = 0; i < 7; i++)
+            {
+                result.Add(day.Date, EventsForDate(day.Date));
+                day = day.AddDays(1);
+            }
+
+            return result;
+        }
+
         public List<Event> EventsForDate(DateTime date)
         {
             try
@@ -67,7 +81,7 @@ namespace Model
             catch(Exception ex)
             {
                 Console.WriteLine(ex.InnerException);
-                return null;
+                return new List<Event>();
             }
         }
     }

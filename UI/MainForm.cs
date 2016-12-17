@@ -13,9 +13,14 @@ namespace UI
 {
     public partial class MainForm : Form
     {
+        private EventContext context;
+
         public MainForm()
         {
             InitializeComponent();
+
+            context = EventContext.GetInstance();
+
             doSomething();
         }
 

@@ -13,13 +13,23 @@ namespace UI
 {
     public partial class MainForm : Form
     {
+        EventContext context;
+
         public MainForm()
         {
             InitializeComponent();
+
+            context = EventContext.GetInstance();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            timer.Tick += new EventHandler(TimerTicked);
+        }
+
+        void TimerTicked(object Sender, EventArgs e)
+        {
+            context.CheckEvents();
         }
 
         private void UpdateEvents()
@@ -39,6 +49,12 @@ namespace UI
         private void button2_Click(object sender, EventArgs e)
         {
             UpdateEvents();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var form = new TelegramLoginForm();
+            form.ShowDialog();
         }
     }
 }

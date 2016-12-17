@@ -182,7 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 365);
+            this.ClientSize = new System.Drawing.Size(357, 365);
             this.Controls.Add(this.smsCheckBox);
             this.Controls.Add(this.telegramCheckBox);
             this.Controls.Add(this.label7);

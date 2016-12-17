@@ -41,6 +41,7 @@ namespace UI.UIModel
                 {
                     UIEvent uiEvent = new UIEvent(newDay.border, events[date][i], events[date].Count, i);
                     newDay.AddEvent(uiEvent);
+                    Console.WriteLine("event added");
                 }
                 uiDays.Add(newDay);
             }
@@ -52,6 +53,7 @@ namespace UI.UIModel
             DrawLines(e);
             timeList.Draw(e);
             dayList.Draw(e);
+            Console.WriteLine("count = " + uiDays.Count);
             foreach (UIDay uiDay in uiDays)
             {
                 uiDay.Draw(e);
@@ -60,8 +62,8 @@ namespace UI.UIModel
 
         private void DrawLines(Graphics e)
         {
-            float rectHeight = timeList.border.height / 12.0f;
-            for (int i = 0; i < 12; i++)
+            float rectHeight = timeList.border.height / 24.0f;
+            for (int i = 0; i < 24; i++)
             {
                 Color c = Color.SaddleBrown;
                 if (i % 2 == 1)

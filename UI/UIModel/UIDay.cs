@@ -34,6 +34,7 @@ namespace UI.UIModel
         {
             foreach (UIEvent ev in events)
             {
+                Console.WriteLine("draw");
                 ev.Draw(e);
             }
         }

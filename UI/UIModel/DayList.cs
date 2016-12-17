@@ -27,7 +27,7 @@ namespace UI.UIModel
                 StringFormat sf = new StringFormat();
                 sf.LineAlignment = StringAlignment.Center;
                 sf.Alignment = StringAlignment.Center;
-                Font font = new Font("Arial", border.height / 2, GraphicsUnit.Pixel);
+                Font font = new Font("Arial", border.height / 2.5f, GraphicsUnit.Pixel);
 
                 e.DrawLine(pen, days[i].border.topRightPoint.X, border.topLeftPoint.Y,
                     days[i].border.topRightPoint.X, days[i].border.bottomLeftPoint.Y);

@@ -20,12 +20,12 @@ namespace UI.UIModel
 
         public void Draw(Graphics e)
         {
-            float rectHeight = border.height / 12.0f;
+            float rectHeight = border.height / 24.0f;
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", rectHeight / 2, GraphicsUnit.Pixel);
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 24; i++)
             {
                 e.DrawString(i + ":00", font, Brushes.Black,
                     new RectangleF(border.topLeftPoint.X, 

@@ -47,7 +47,17 @@ namespace UI
             Dictionary<DateTime, List<Event>> res = new Dictionary<DateTime, List<Event>>();
             for (int i = 0; i < 7; i++)
             {
-                res.Add(new DateTime(1, 1, 1, i, i, 0), new List<Event>());
+                List<Event> ev = new List<Event>();
+                TimeSpan startTime = new TimeSpan(11, 30, 0);
+                TimeSpan endTime = new TimeSpan(15, 30, 0);
+                ev.Add(new Event("Проснуться", "Очень рано, но не слишком", startTime, endTime,
+                    DateTime.Today, EventPriority.High, new List<IEventNotifier>()));
+                endTime = new TimeSpan(18, 30, 0);
+                ev.Add(new Event("Проснуться", "Очень рано, но не слишком", startTime, endTime,
+                    DateTime.Today, EventPriority.High, new List<IEventNotifier>()));
+
+                DateTime date = DateTime.Today;
+                res.Add(date.AddDays(i), ev);
             }
 
             return res;

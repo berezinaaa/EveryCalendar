@@ -86,6 +86,12 @@
     <Compile Include="TelegramLoginForm.Designer.cs">
       <DependentUpon>TelegramLoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIModel\Border.cs" />
+    <Compile Include="UIModel\DayList.cs" />
+    <Compile Include="UIModel\TimeList.cs" />
+    <Compile Include="UIModel\UIDay.cs" />
+    <Compile Include="UIModel\UIEvent.cs" />
+    <Compile Include="UIModel\UIWeek.cs" />
     <EmbeddedResource Include="EditEventForm.resx">
       <DependentUpon>EditEventForm.cs</DependentUpon>
     </EmbeddedResource>

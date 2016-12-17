@@ -23,7 +23,7 @@ namespace UI
             isEditMode = false;
         }
 
-        // edit event mode 
+        // edit event mode  
         public EditEventForm(Event ev): base()
         {
             isEditMode = true;

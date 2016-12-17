@@ -29,7 +29,7 @@ namespace UI
             isEditMode = true;
             this.ev = ev;
             titleTextBox.Text = ev.Title;
-            var day = ev.Day;
+            var day = ev.Day; 
             startTimePicker.Value = day.AddSeconds(ev.StartTime.TotalSeconds);
             endTimePicker.Value = day.AddSeconds(ev.EndTime.TotalSeconds);
             dayPicker.Value = day;

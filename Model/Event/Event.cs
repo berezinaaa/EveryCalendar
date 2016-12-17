@@ -26,7 +26,7 @@ namespace Model
         public EventPriority Priority { get; set; }
         public List<IEventNotifier> Notifiers { get; set; }
 
-        private bool isNotified;
+        protected bool isNotified;
 
         public Event()
         {
@@ -69,7 +69,7 @@ namespace Model
             }
         }
 
-        public void Notify()
+        virtual public void Notify()
         {
             isNotified = true;
             foreach (IEventNotifier notifier in Notifiers)

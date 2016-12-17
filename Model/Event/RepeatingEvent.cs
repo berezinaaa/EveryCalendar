@@ -9,6 +9,8 @@ namespace Model
     class RepeatingEvent: Event
     {
         TimeSpan Interval { get; set; }
+        protected int maxRepeatingCount;
+        protected int repeatingCount;
 
         public RepeatingEvent() { }
 
@@ -18,6 +20,28 @@ namespace Model
             base(title, descr, start, end, day, priority,  notifiers)
         {
             Interval = interval;
+
+            var time = start;
+            while (time < end)
+            {
+                maxRepeatingCount++;
+                time = time.Add(Interval);
+            }
+        }
+
+        override public void Notify()
+        {
+            base.Notify();
+            isNotified = false;
+            
+            if (repeatingCount < maxRepeatingCount)
+            {
+                repeatingCount++;
+            }
+            else
+            {
+                isNotified = true;
+            }
         }
     }
 }

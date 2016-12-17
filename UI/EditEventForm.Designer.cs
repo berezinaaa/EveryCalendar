@@ -43,11 +43,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.telegramCheckBox = new System.Windows.Forms.CheckBox();
             this.smsCheckBox = new System.Windows.Forms.CheckBox();
+            this.completeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(109, 10);
+            this.titleTextBox.Location = new System.Drawing.Point(75, 10);
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(200, 20);
             this.titleTextBox.TabIndex = 0;
@@ -89,23 +90,27 @@
             // 
             // startTimePicker
             // 
-            this.startTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.startTimePicker.Location = new System.Drawing.Point(109, 36);
+            this.startTimePicker.CustomFormat = "HH:mm";
+            this.startTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startTimePicker.Location = new System.Drawing.Point(75, 36);
             this.startTimePicker.Name = "startTimePicker";
+            this.startTimePicker.ShowUpDown = true;
             this.startTimePicker.Size = new System.Drawing.Size(200, 20);
             this.startTimePicker.TabIndex = 9;
             // 
             // endTimePicker
             // 
-            this.endTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.endTimePicker.Location = new System.Drawing.Point(109, 62);
+            this.endTimePicker.CustomFormat = "HH:mm";
+            this.endTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endTimePicker.Location = new System.Drawing.Point(75, 62);
             this.endTimePicker.Name = "endTimePicker";
+            this.endTimePicker.ShowUpDown = true;
             this.endTimePicker.Size = new System.Drawing.Size(200, 20);
             this.endTimePicker.TabIndex = 10;
             // 
             // dayPicker
             // 
-            this.dayPicker.Location = new System.Drawing.Point(110, 91);
+            this.dayPicker.Location = new System.Drawing.Point(76, 91);
             this.dayPicker.Name = "dayPicker";
             this.dayPicker.Size = new System.Drawing.Size(200, 20);
             this.dayPicker.TabIndex = 12;
@@ -121,7 +126,7 @@
             // 
             // descriptionTextBox
             // 
-            this.descriptionTextBox.Location = new System.Drawing.Point(109, 117);
+            this.descriptionTextBox.Location = new System.Drawing.Point(75, 117);
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(200, 63);
             this.descriptionTextBox.TabIndex = 13;
@@ -144,7 +149,7 @@
             "Низкий",
             "Обычный",
             "Высокий"});
-            this.priorityComboBox.Location = new System.Drawing.Point(109, 186);
+            this.priorityComboBox.Location = new System.Drawing.Point(75, 186);
             this.priorityComboBox.Name = "priorityComboBox";
             this.priorityComboBox.Size = new System.Drawing.Size(111, 21);
             this.priorityComboBox.TabIndex = 15;
@@ -178,11 +183,21 @@
             this.smsCheckBox.Text = "SMS";
             this.smsCheckBox.UseVisualStyleBackColor = true;
             // 
+            // completeButton
+            // 
+            this.completeButton.Location = new System.Drawing.Point(12, 326);
+            this.completeButton.Name = "completeButton";
+            this.completeButton.Size = new System.Drawing.Size(261, 24);
+            this.completeButton.TabIndex = 19;
+            this.completeButton.UseVisualStyleBackColor = true;
+            this.completeButton.Click += new System.EventHandler(this.completeButton_Click);
+            // 
             // EditEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 365);
+            this.ClientSize = new System.Drawing.Size(285, 362);
+            this.Controls.Add(this.completeButton);
             this.Controls.Add(this.smsCheckBox);
             this.Controls.Add(this.telegramCheckBox);
             this.Controls.Add(this.label7);
@@ -223,5 +238,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox telegramCheckBox;
         private System.Windows.Forms.CheckBox smsCheckBox;
+        private System.Windows.Forms.Button completeButton;
     }
 }

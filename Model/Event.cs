@@ -28,6 +28,11 @@ namespace Model
 
         private bool isNotified;
 
+        public Event()
+        {
+            Notifiers = new List<IEventNotifier>();
+        }
+
         public Event(string title, string descr, TimeSpan start, TimeSpan end, DateTime day,
                      EventPriority priority, List<IEventNotifier> notifiers)
         {

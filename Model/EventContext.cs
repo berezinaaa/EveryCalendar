@@ -7,20 +7,30 @@ using System.Data.Entity;
 
 namespace Model
 {
-    class EventContext: DbContext
+    public class EventContext: DbContext
     {
-        
+        private static EventContext instance;
+
+        public static EventContext GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new EventContext();
+            }
+            return instance;
+        }
+
         public DbSet<Event> events { get; set; }
 
         public void Add(Event calendarEvent)
         {
-            this.Add(calendarEvent);
+            this.events.Add(calendarEvent);
             this.SaveChanges();
         }
 
         public void Remove(Event calendarEvent)
         {
-            this.Remove(calendarEvent);
+            this.events.Remove(calendarEvent);
             this.SaveChanges();
         }
 

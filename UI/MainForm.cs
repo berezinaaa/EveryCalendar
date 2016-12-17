@@ -20,8 +20,8 @@ namespace UI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            var telegram = TelegramManager.GetInstance();
-            telegram.SendMessage("hello world");
+           // var telegram = TelegramManager.GetInstance();
+            //telegram.SendMessage("hello world");
         }
 
         private void button1_Click(object sender, EventArgs e)

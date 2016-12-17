@@ -23,5 +23,11 @@ namespace UI
             var telegram = TelegramManager.GetInstance();
             telegram.SendMessage("hello world");
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var editForm = new EditEventForm();
+            editForm.ShowDialog();
+        }
     }
 }

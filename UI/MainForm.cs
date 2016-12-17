@@ -63,8 +63,8 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //var editForm = new EditEventForm();
-            //editForm.ShowDialog();
+            var editForm = new EditEventForm();
+            editForm.ShowDialog();
         }
     }
 }

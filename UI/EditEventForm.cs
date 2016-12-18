@@ -17,10 +17,13 @@ namespace UI
         private Event ev;
         bool isEditMode;
         private UIModel.UIWeek week;
+        private MainForm main;
+
         // add new event mode
-        public EditEventForm(UIModel.UIWeek week)
+        public EditEventForm(UIModel.UIWeek week, MainForm main)
         {
             InitializeComponent();
+            this.main = main;
             isEditMode = false;
             this.week = week;
             button1.Enabled = false;
@@ -178,6 +181,11 @@ namespace UI
                 EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
                 week.pictureBox);
             week.Draw();
+
+            if (main != null)
+            {
+                main.Update();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

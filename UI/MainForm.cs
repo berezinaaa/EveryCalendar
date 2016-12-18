@@ -78,7 +78,7 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var editForm = new EditEventForm(week);
+            var editForm = new EditEventForm(week, this);
             editForm.ShowDialog();
         }
 
@@ -124,6 +124,12 @@ namespace UI
         {
             var form = new TelegramLoginForm();
             form.ShowDialog();
+        }
+
+        public void Update()
+        {
+            button3.PerformClick();
+            button2.PerformClick();
         }
     }
 }

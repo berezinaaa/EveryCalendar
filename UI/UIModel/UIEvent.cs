@@ -13,7 +13,7 @@ namespace UI.UIModel
         public Event ev { get; set; }
         public Border border { get; set; }
 
-        public UIEvent (Border uiDayBorder, Event ev, int numberEvents, int account)
+        public UIEvent(Border uiDayBorder, Event ev, int numberEvents, int account)
         {
             this.ev = ev;
             int startMinutes = ev.StartTime.Hours * 60 + ev.StartTime.Minutes;
@@ -28,12 +28,29 @@ namespace UI.UIModel
 
         public void Draw(Graphics e)
         {
-            Console.WriteLine("border.topLeftPoint.X = " + border.topLeftPoint.X);
-            Console.WriteLine("border.topLeftPoint.Y = " + border.topLeftPoint.Y);
-            Console.WriteLine("width" + border.width);
-            Console.WriteLine("height" + border.height + "\n");
-            e.DrawRectangle(new Pen(Color.Red, 2), border.topLeftPoint.X + 1, border.topLeftPoint.Y + 1,
-                border.width - 2, border.height - 2);
+            e.FillRectangle(new SolidBrush(Color.White), border.topLeftPoint.X + 1, border.topLeftPoint.Y + 1,
+                border.width - 2, border.height);
+            e.DrawRectangle(new Pen(Color.Black, 2), border.topLeftPoint.X + 1, border.topLeftPoint.Y + 1,
+                border.width - 2, border.height);
+            DrawText(e);
+        }
+
+        private void DrawText(Graphics e)
+        {
+            float rectHeight = border.height / 2;
+            StringFormat sf = new StringFormat();
+            sf.LineAlignment = StringAlignment.Center;
+            sf.Alignment = StringAlignment.Center;
+            Font font = new Font("Arial", 10, GraphicsUnit.Pixel);
+            e.DrawString(ev.Title, font, Brushes.Black,
+                new RectangleF(border.topLeftPoint.X,
+                border.topLeftPoint.Y, border.width, rectHeight), sf);
+            e.DrawString(ev.Description, font, Brushes.Black, 
+                new RectangleF(border.topLeftPoint.X,
+                border.topLeftPoint.Y + rectHeight, border.width, rectHeight), sf);
+            e.DrawLine(new Pen(Color.Black, 1), border.topLeftPoint.X, border.topLeftPoint.Y + rectHeight,
+                border.topRightPoint.X, border.topRightPoint.Y + rectHeight);
         }
     }
 }
+

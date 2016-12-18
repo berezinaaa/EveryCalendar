@@ -53,7 +53,7 @@ namespace UI
                 ev.Add(new Event("Проснуться", "Очень рано, но не слишком", startTime, endTime,
                     DateTime.Today, EventPriority.High, new List<IEventNotifier>()));
                 endTime = new TimeSpan(18, 30, 0);
-                ev.Add(new Event("Проснуться", "Очень рано, но не слишком", startTime, endTime,
+                ev.Add(new Event("Проснуться", "Очень рано, но не слишком очень много текстафываофдылвжаофывдлаофыдвлаофывджлаофыдвлафывафыва", startTime, endTime,
                     DateTime.Today, EventPriority.High, new List<IEventNotifier>()));
 
                 DateTime date = DateTime.Today;

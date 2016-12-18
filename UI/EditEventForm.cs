@@ -15,16 +15,16 @@ namespace UI
     public partial class EditEventForm : Form
     {
         private Event ev;
-        private MainForm owner;
+       // private MainForm owner;
         bool isEditMode;
         private UIModel.UIWeek week;
         // add new event mode
-        public EditEventForm(UIModel.UIWeek week, MainForm owner)
+        public EditEventForm(UIModel.UIWeek week)
         {
             InitializeComponent();
             isEditMode = false;
             this.week = week;
-            this.owner = owner;
+            //this.owner = owner;
         }
 
         // edit event mode  

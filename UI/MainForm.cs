@@ -23,6 +23,8 @@ namespace UI
             manager = EventManager.GetInstance();
             timer1.Enabled = true;
             doSomething();
+            button2.Text = "Назад";
+            button3.Text = "Далее";
         }
 
         public void doSomething()
@@ -79,9 +81,9 @@ namespace UI
 
         private void DrawCalendar()
         {
-            week = new UIModel.UIWeek(week.border,
-                EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
-                week.pictureBox);
+            //week = new UIModel.UIWeek(week.border,
+             //   EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
+              //  week.pictureBox);
             week.Draw();
         }
 
@@ -94,7 +96,8 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var editForm = new EditEventForm(week, this);
+            var editForm = new EditEventForm(week);
+            //var editForm = new EditEventForm(week);
             editForm.ShowDialog();
         }
 
@@ -106,6 +109,26 @@ namespace UI
         private void timer1_Tick(object sender, EventArgs e)
         {
             manager.CheckEvents();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DateTime day = week.startDay;
+            day = day.AddDays(-7);
+            week = new UIModel.UIWeek(week.border,
+                EventManager.GetInstance().WeekEventsFromStartDate(day),
+                week.pictureBox);
+            DrawCalendar();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DateTime day = week.startDay;
+            day = day.AddDays(7);
+            week = new UIModel.UIWeek(week.border,
+                EventManager.GetInstance().WeekEventsFromStartDate(day),
+                week.pictureBox);
+            DrawCalendar();
         }
     }
 }

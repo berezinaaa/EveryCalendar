@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    [Serializable]
     public class RepeatingEvent: Event
     {
         public TimeSpan Interval { get; set; }

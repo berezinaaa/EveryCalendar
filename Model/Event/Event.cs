@@ -13,8 +13,15 @@ namespace Model
         Low, Middle, High
     }
 
+    [Serializable]
     public class Event
     {
+        string title;
+        TimeSpan startTime;
+        TimeSpan endTime;
+        DateTime day;
+
+
         public string Title { get; set; }
         public string Description { get; set; }
         public TimeSpan StartTime { get; set; }

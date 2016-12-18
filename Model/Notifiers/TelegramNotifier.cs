@@ -9,6 +9,7 @@ using TeleSharp.TL;
 
 namespace Model
 {
+    [Serializable]
     public class TelegramNotifier: IEventNotifier
     {
         public void Notify(Event calendarEvent)

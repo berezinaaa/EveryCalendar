@@ -79,6 +79,9 @@ namespace UI
 
         private void DrawCalendar()
         {
+            week = new UIModel.UIWeek(week.border,
+                EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
+                week.pictureBox);
             week.Draw();
         }
 
@@ -93,6 +96,11 @@ namespace UI
         {
             var editForm = new EditEventForm(week, this);
             editForm.ShowDialog();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            manager.Save();
         }
     }
 }

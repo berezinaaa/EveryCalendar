@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace Model.Notifiers
 {
+    [Serializable]
     public class VisualNotifier: IEventNotifier
     {
         public void Notify(Event ev)

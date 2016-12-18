@@ -7,6 +7,7 @@ using Twilio;
 
 namespace Model
 {
+    [Serializable]
     public class SmsNotifier: IEventNotifier
     {
 
@@ -16,8 +17,6 @@ namespace Model
             var client = new TwilioRestClient("AC82d123e1c9a93a9e227319c99d3b5072", "a2d72679907147f5d9ab1139f3a1c354");
             var message = calendarEvent.NotificationMessage;
             var m = client.SendMessageWithService("MG36acbb3450052e429a34569808ad6bcf", "+79175443630", message);
-            Console.WriteLine(m.ErrorMessage);
-            Console.WriteLine();
         }
     }
 }

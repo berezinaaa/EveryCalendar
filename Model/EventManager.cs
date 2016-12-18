@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Model
 {
@@ -22,7 +24,17 @@ namespace Model
 
         public EventManager()
         {
-            this.events = new List<Event>();
+            try
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream("events1.bin", FileMode.Open, FileAccess.Read, FileShare.None);
+                events = (List<Event>)formatter.Deserialize(stream);
+                stream.Close();
+            }
+            catch (Exception ex)
+            {
+                this.events = new List<Event>();
+            }
         }
 
         public List<Event> events { get; set; }
@@ -54,6 +66,15 @@ namespace Model
             foreach (Event e in eventsToDelete)
             {
                 todayEvents.Remove(e);
+            }
+        }
+
+        public void Save()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (Stream stream = new FileStream("events1.bin", FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                formatter.Serialize(stream, events);
             }
         }
 

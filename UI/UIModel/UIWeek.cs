@@ -67,6 +67,8 @@ namespace UI.UIModel
             {
                 uiDay.Draw(e);
             }
+
+            pictureBox.Refresh();
         }
 
         private void DrawLines(Graphics e)

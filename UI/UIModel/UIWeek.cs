@@ -14,12 +14,15 @@ namespace UI.UIModel
         private List<UIDay> uiDays;
         private TimeList timeList;
         private DayList dayList;
-        private Graphics e;
-        public UIWeek(Border border, Dictionary<DateTime, List<Event>> events, Graphics e)
+        public Graphics e { get; }
+        public DateTime startDay { get; }
+        public PictureBox pictureBox;
+        public UIWeek(Border border, Dictionary<DateTime, List<Event>> events, PictureBox pB)
         {
             this.border = border;
+            this.pictureBox = pB;
             uiDays = new List<UIDay>();
-            this.e = e;
+            this.e = Graphics.FromImage(pB.Image);
             float indentX = border.width / 10.0f;
             float indentY = border.height / 15.0f;
             timeList = new TimeList(new Border(border.topLeftPoint.X, (int)indentY, border.width / 10,
@@ -27,7 +30,7 @@ namespace UI.UIModel
             dayList = new DayList(new Border((int)indentX, border.topLeftPoint.Y, border.width - indentX,
                 indentY), border, uiDays);
             setUIDays(events);
-            
+            this.startDay = uiDays[0].date;
         }
 
         private void setUIDays(Dictionary<DateTime, List<Event>> events)
@@ -55,7 +58,7 @@ namespace UI.UIModel
         }
 
         public void Draw()
-        {
+        { 
             e.Clear(Color.White);
             DrawLines(e);
             timeList.Draw(e);

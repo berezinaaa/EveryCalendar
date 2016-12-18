@@ -20,6 +20,11 @@ namespace Model
             return instance;
         }
 
+        public EventManager()
+        {
+            this.events = new List<Event>();
+        }
+
         public List<Event> events { get; set; }
 
         public void Add(Event calendarEvent)

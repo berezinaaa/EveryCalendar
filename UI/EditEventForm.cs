@@ -15,14 +15,16 @@ namespace UI
     public partial class EditEventForm : Form
     {
         private Event ev;
+        private MainForm owner;
         bool isEditMode;
         private UIModel.UIWeek week;
         // add new event mode
-        public EditEventForm(UIModel.UIWeek week)
+        public EditEventForm(UIModel.UIWeek week, MainForm owner)
         {
             InitializeComponent();
             isEditMode = false;
             this.week = week;
+            this.owner = owner;
         }
 
         // edit event mode  
@@ -105,7 +107,6 @@ namespace UI
             {
                 manager.Add(ev);
             }
-
             this.Close();
             
             //TODO: notifications 
@@ -113,6 +114,9 @@ namespace UI
 
         private void EditEventForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            week = new UIModel.UIWeek(week.border,
+                EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
+                week.pictureBox);
             week.Draw();
         }
     }

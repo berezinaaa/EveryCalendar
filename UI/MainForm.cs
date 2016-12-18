@@ -34,8 +34,8 @@ namespace UI
             flowLayoutPanel1.Controls.Add(pictureBox);
             pictureBox.MouseDoubleClick += new MouseEventHandler(pictureBox1DoubleClick);
             week = new UIModel.UIWeek(new UIModel.Border(0, 0,
-                pictureBox.Width, pictureBox.Height), fillDay(), Graphics.FromImage(pictureBox.Image));
-            DrawCalendar(pictureBox);
+                pictureBox.Width, pictureBox.Height), fillDay(), pictureBox);
+            DrawCalendar();
         }
 
         private void pictureBox1DoubleClick (object sender, EventArgs e)
@@ -44,9 +44,15 @@ namespace UI
             Point coordinates = me.Location;
             week.clicked(coordinates, (ev) => {
                 var editForm = new EditEventForm(ev, week);
+                editForm.FormClosing += new FormClosingEventHandler(this.EditFrom_FormClosing);
                 editForm.ShowDialog();
             });
 
+        }
+
+        private void EditFrom_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DrawCalendar();
         }
 
         //TODO: DELETE
@@ -71,10 +77,11 @@ namespace UI
             return res;
         }
 
-        private void DrawCalendar(PictureBox pictureBox)
+        private void DrawCalendar()
         {
             week.Draw();
         }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -84,7 +91,7 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var editForm = new EditEventForm(week);
+            var editForm = new EditEventForm(week, this);
             editForm.ShowDialog();
         }
     }

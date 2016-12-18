@@ -26,6 +26,7 @@ namespace UI
         // edit event mode  
         public EditEventForm(Event ev): base()
         {
+            InitializeComponent();
             isEditMode = true;
             this.ev = ev;
             titleTextBox.Text = ev.Title;

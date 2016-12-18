@@ -41,9 +41,16 @@ namespace UI.UIModel
                 {
                     UIEvent uiEvent = new UIEvent(newDay.border, events[date][i], events[date].Count, i);
                     newDay.AddEvent(uiEvent);
-                    Console.WriteLine("event added");
                 }
                 uiDays.Add(newDay);
+            }
+        }
+
+        public void clicked(Point mouse, Action<Event> openDialog)
+        {
+            foreach (UIDay uiDay in uiDays)
+            {
+                uiDay.clicked(mouse, openDialog);
             }
         }
 
@@ -53,7 +60,6 @@ namespace UI.UIModel
             DrawLines(e);
             timeList.Draw(e);
             dayList.Draw(e);
-            Console.WriteLine("count = " + uiDays.Count);
             foreach (UIDay uiDay in uiDays)
             {
                 uiDay.Draw(e);

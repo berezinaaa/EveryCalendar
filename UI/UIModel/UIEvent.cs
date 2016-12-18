@@ -51,6 +51,16 @@ namespace UI.UIModel
             e.DrawLine(new Pen(Color.Black, 1), border.topLeftPoint.X, border.topLeftPoint.Y + rectHeight,
                 border.topRightPoint.X, border.topRightPoint.Y + rectHeight);
         }
+
+        public void clicked(Point mouse, Action<Event> openDialog)
+        {
+            if (mouse.X > border.topLeftPoint.X && mouse.X < border.topRightPoint.X &&
+                mouse.Y > border.topRightPoint.Y && mouse.Y < border.bottomRightPoint.Y)
+            {
+                Console.WriteLine("Event clicked = " + ev.Title);
+                openDialog(ev);
+            }
+        }
     }
 }
 

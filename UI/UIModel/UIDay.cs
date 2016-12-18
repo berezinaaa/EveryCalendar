@@ -30,11 +30,22 @@ namespace UI.UIModel
             events.Remove(ev);
         }
 
+        public void clicked(Point mouse, Action<Event> openDialog)
+        {
+            if (mouse.X > border.topLeftPoint.X && mouse.X < border.topRightPoint.X &&
+               mouse.Y > border.topRightPoint.Y && mouse.Y < border.bottomRightPoint.Y)
+            {
+                foreach (UIEvent ev in events)
+                {
+                    ev.clicked(mouse, openDialog);
+                }
+            }
+        }
+
         public void Draw(Graphics e)
         {
             foreach (UIEvent ev in events)
             {
-                Console.WriteLine("draw");
                 ev.Draw(e);
             }
         }

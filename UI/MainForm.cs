@@ -14,6 +14,7 @@ namespace UI
     public partial class MainForm : Form
     {
         private EventContext context;
+        private UIModel.UIWeek week;
 
         public MainForm()
         {
@@ -31,14 +32,21 @@ namespace UI
             pictureBox.Height = flowLayoutPanel1.Height * 2;
             pictureBox.Image = new Bitmap(pictureBox.Width, pictureBox.Height);
             flowLayoutPanel1.Controls.Add(pictureBox);
-            DrawCalendar(pictureBox);
             pictureBox.MouseDoubleClick += new MouseEventHandler(pictureBox1DoubleClick);
-
+            week = new UIModel.UIWeek(new UIModel.Border(0, 0,
+                pictureBox.Width, pictureBox.Height), fillDay());
+            DrawCalendar(pictureBox);
         }
 
         private void pictureBox1DoubleClick (object sender, EventArgs e)
         {
-            Application.Run(new EditEventForm());
+            MouseEventArgs me = (MouseEventArgs)e;
+            Point coordinates = me.Location;
+            week.clicked(coordinates, (ev) => {
+                var editForm = new EditEventForm(ev);
+                editForm.ShowDialog();
+            });
+
         }
 
         //TODO: DELETE
@@ -65,8 +73,6 @@ namespace UI
 
         private void DrawCalendar(PictureBox pictureBox)
         {
-            UIModel.UIWeek week = new UIModel.UIWeek(new UIModel.Border(0, 0,
-                pictureBox.Width, pictureBox.Height), fillDay());
             week.Draw(Graphics.FromImage(pictureBox.Image));
         }
 

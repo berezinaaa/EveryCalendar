@@ -10,39 +10,38 @@ namespace Model
     public class RepeatingEvent: Event
     {
         public TimeSpan Interval { get; set; }
-        protected int maxRepeatingCount;
-        protected int repeatingCount;
 
-        public RepeatingEvent() { }
+        protected List<TimeSpan> repeats;
 
         public RepeatingEvent(
             string title, string descr, TimeSpan start, TimeSpan end,
             DateTime day, EventPriority priority, TimeSpan interval, List<IEventNotifier> notifiers): 
-            base(title, descr, start, end, day, priority,  notifiers)
+            base(title, descr, start, end, day, priority, notifiers)
         {
             Interval = interval;
 
+            repeats = new List<TimeSpan>();
             var time = start;
             while (time < end)
             {
-                maxRepeatingCount++;
-                time = time.Add(Interval);
+                repeats.Add(time);
+                time = time.Add(interval);
             }
         }
 
-        override public void Notify()
+        public override void Notify()
         {
             base.Notify();
             isNotified = false;
             
-            if (repeatingCount < maxRepeatingCount)
+            foreach (TimeSpan repeat in repeats)
             {
-                repeatingCount++;
+                var now = DateTime.Now;
+                if (now.Minute == repeat.Minutes && now.Hour == repeat.Hours)
+                    return;
             }
-            else
-            {
-                isNotified = true;
-            }
+
+            isNotified = true;
         }
     }
 }

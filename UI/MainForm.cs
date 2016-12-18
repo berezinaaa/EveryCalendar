@@ -21,7 +21,7 @@ namespace UI
             InitializeComponent();
 
             manager = EventManager.GetInstance();
-
+            timer1.Enabled = true;
             doSomething();
         }
 
@@ -101,6 +101,11 @@ namespace UI
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             manager.Save();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            manager.CheckEvents();
         }
     }
 }

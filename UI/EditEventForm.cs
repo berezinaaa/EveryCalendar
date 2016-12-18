@@ -53,36 +53,23 @@ namespace UI
 
         private void completeButton_Click(object sender, EventArgs e)
         {
-            if (!isEditMode)
-            {
-                if (repeatCheckbox.Checked)
-                {
-                    var repeatingEvent = new RepeatingEvent();
-                    repeatingEvent.Interval = repeatTimePicker.Value.TimeOfDay;
-                    this.ev = repeatingEvent;
-                }
-                else
-                {
-                    this.ev = new Event();
-                }
-            }
+            var title = titleTextBox.Text;
+            var startTime = startTimePicker.Value.TimeOfDay;
+            var endTime = endTimePicker.Value.TimeOfDay;
+            var day = dayPicker.Value.Date;
+            var description = descriptionTextBox.Text;
+            var priority = EventPriority.Middle;
 
-            ev.Title = titleTextBox.Text;
-            ev.StartTime = startTimePicker.Value.TimeOfDay;
-            ev.EndTime = endTimePicker.Value.TimeOfDay;
-            ev.Day = dayPicker.Value.Date;
-            ev.Description = descriptionTextBox.Text;
-            
             switch(priorityComboBox.SelectedIndex)
             {
                 case 0:
-                    ev.Priority = EventPriority.Low;
+                    priority = EventPriority.Low;
                     break;
                 case 1:
-                    ev.Priority = EventPriority.Middle;
+                    priority = EventPriority.Middle;
                     break;
                 default:
-                    ev.Priority = EventPriority.High;
+                    priority = EventPriority.High;
                     break;
             }
 
@@ -100,16 +87,29 @@ namespace UI
             {
                 notifiers.Add(new SmsNotifier());
             }
-            ev.Notifiers = notifiers;
 
             var manager = EventManager.GetInstance();
-            if (!isEditMode)
+            if (isEditMode)
             {
-                manager.Add(ev);
+                manager.Remove(ev);
             }
-            this.Close();
+
+            if (repeatCheckbox.Checked)
+            {
+                var interval = repeatTimePicker.Value.TimeOfDay;
+                ev = new RepeatingEvent(title, description, startTime, endTime, day,
+                                                        priority, interval, notifiers);
+            }
+            else
+            {
+                ev = new Event(title, description, startTime, endTime, day,
+                                                        priority, notifiers);
+            }
+
             
-            //TODO: notifications 
+            manager.Add(ev);
+            
+            this.Close();
         }
 
         private void EditEventForm_FormClosed(object sender, FormClosedEventArgs e)

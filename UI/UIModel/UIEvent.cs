@@ -28,7 +28,24 @@ namespace UI.UIModel
 
         public void Draw(Graphics e)
         {
-            e.FillRectangle(new SolidBrush(Color.White), border.topLeftPoint.X + 1, border.topLeftPoint.Y + 1,
+            Color fillColor;
+            switch (ev.Priority)
+            {
+                case EventPriority.Low:
+                    fillColor = Color.White;
+                    break;
+                case EventPriority.Middle:
+                    fillColor = Color.Orange;
+                    break;
+                case EventPriority.High:
+                    fillColor = Color.OrangeRed;
+                    break;
+                default:
+                    fillColor = Color.White;
+                    break;
+            }
+
+            e.FillRectangle(new SolidBrush(fillColor), border.topLeftPoint.X + 1, border.topLeftPoint.Y + 1,
                 border.width - 2, border.height);
             e.DrawRectangle(new Pen(Color.Black, 2), border.topLeftPoint.X + 1, border.topLeftPoint.Y + 1,
                 border.width - 2, border.height);

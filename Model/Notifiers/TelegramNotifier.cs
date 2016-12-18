@@ -15,13 +15,17 @@ namespace Model
         public void Notify(Event calendarEvent)
         {
             var telegram = TelegramManager.GetInstance();
-            telegram.SendMessage(calendarEvent.NotificationMessage);
+            if (telegram.isLogin)
+            {
+                telegram.SendMessage(calendarEvent.NotificationMessage);
+            }
         }
     }
 
     public class TelegramManager
     {
-        private static TelegramManager manager;
+       public static TelegramManager manager;
+        public bool isLogin;
 
         private TelegramClient client;
         private TLUser user;
@@ -70,6 +74,7 @@ namespace Model
             try
             {
                 user = await client.MakeAuthAsync(phone, hash, code);
+                isLogin = true;
                 callback(true, null);
             }
             catch (Exception ex)

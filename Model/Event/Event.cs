@@ -40,8 +40,18 @@ namespace Model
         public Event(string title, string descr, TimeSpan start, TimeSpan end, DateTime day,
                      EventPriority priority, List<IEventNotifier> notifiers)
         {
+            if (title.Equals("") || title == null)
+            {
+                throw new Exception("Название не должно быть пустым!");
+            }
             Title = title;
             Description = descr;
+
+            if (start >= end)
+            {
+                throw new Exception("Время начала события должно быть меньше конца!");
+            }
+
             StartTime = start;
             EndTime = end;
             Day = day;
@@ -57,8 +67,14 @@ namespace Model
         {
             get
             {
-                return "Время " + StartTime + ". Начинается событие " + Title;
+                return "Напоминание о событии " + Title + "\n Время: " + 
+                    timeString(StartTime) + " - " + timeString(endTime);
             }
+        }
+
+        private string timeString(TimeSpan span)
+        {
+            return span.Hours + ":" + span.Minutes;
         }
 
         public bool ShouldNotify

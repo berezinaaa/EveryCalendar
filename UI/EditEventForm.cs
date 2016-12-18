@@ -25,17 +25,30 @@ namespace UI
             isEditMode = false;
             this.week = week;
             this.owner = owner;
+
+            completeButton.Text = "Добавить";
+            this.Text = "Добавить новое событие";
         }
 
         // edit event mode  
-        public EditEventForm(Event ev, UIModel.UIWeek week) : base()
+        public EditEventForm(Event ev, UIModel.UIWeek week)
         {
             InitializeComponent();
             this.week = week;
             isEditMode = true;
             this.ev = ev;
+
+            Fill(ev);
+
+            this.Text = "Редактирование события";
+            completeButton.Text = "Редактировать";
+            //TODO: notifications
+        }
+
+        private void Fill(Event ev)
+        {
             titleTextBox.Text = ev.Title;
-            var day = ev.Day; 
+            var day = ev.Day;
             startTimePicker.Value = day.AddSeconds(ev.StartTime.TotalSeconds);
             endTimePicker.Value = day.AddSeconds(ev.EndTime.TotalSeconds);
             dayPicker.Value = day;
@@ -43,12 +56,49 @@ namespace UI
 
             priorityComboBox.SelectedIndex = (int)ev.Priority;
 
-            //TODO: notifications
+            bool visual = false;
+            bool telegram = false;
+            bool sms = false;
+
+            foreach(IEventNotifier notifier in ev.Notifiers)
+            {
+                if (notifier is SmsNotifier)
+                {
+                    sms = true;
+                }
+                if (notifier is TelegramNotifier)
+                {
+                    telegram = true;
+                }
+                if (notifier is VisualNotifier)
+                {
+                    visual = true;
+                }
+            }
+
+            visualCheckbox.Checked = visual;
+            smsCheckBox.Checked = sms;
+            telegramCheckBox.Checked = telegram;
+
+            if (ev is RepeatingEvent)
+            {
+                var e = (RepeatingEvent)ev;
+                repeatCheckbox.Checked = true;
+                repeatTimePicker.Value = day.AddSeconds(e.Interval.TotalSeconds);
+            }
+            else
+            {
+                repeatCheckbox.Checked = false;
+            }
         }
 
         private void EditEventForm_Load(object sender, EventArgs e)
         {
-            
+            var telegram = TelegramManager.GetInstance();
+            if (!telegram.isLogin)
+            {
+                telegramCheckBox.Enabled = false;
+            }
         }
 
         private void completeButton_Click(object sender, EventArgs e)
@@ -94,22 +144,28 @@ namespace UI
                 manager.Remove(ev);
             }
 
-            if (repeatCheckbox.Checked)
+            try
             {
-                var interval = repeatTimePicker.Value.TimeOfDay;
-                ev = new RepeatingEvent(title, description, startTime, endTime, day,
-                                                        priority, interval, notifiers);
-            }
-            else
-            {
-                ev = new Event(title, description, startTime, endTime, day,
-                                                        priority, notifiers);
-            }
+                if (repeatCheckbox.Checked)
+                {
+                    var interval = repeatTimePicker.Value.TimeOfDay;
+                    ev = new RepeatingEvent(title, description, startTime, endTime, day,
+                                                            priority, interval, notifiers);
+                }
+                else
+                {
+                    ev = new Event(title, description, startTime, endTime, day,
+                                                            priority, notifiers);
+                }
 
-            
-            manager.Add(ev);
-            
-            this.Close();
+                manager.Add(ev);
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
         }
 
         private void EditEventForm_FormClosed(object sender, FormClosedEventArgs e)

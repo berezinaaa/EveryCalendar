@@ -52,20 +52,13 @@ namespace Model
         public void CheckEvents()
         {
             var todayEvents = EventsForDate(DateTime.Now.Date);
-            var eventsToDelete = new List<Event>();
 
             foreach (Event e in todayEvents)
             {
                 if (e.ShouldNotify)
                 {
                     e.Notify();
-                    eventsToDelete.Add(e);
                 }
-            }
-
-            foreach (Event e in eventsToDelete)
-            {
-                todayEvents.Remove(e);
             }
         }
 

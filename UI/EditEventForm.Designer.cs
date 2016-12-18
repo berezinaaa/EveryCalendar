@@ -156,7 +156,7 @@
             "Высокий"});
             this.priorityComboBox.Location = new System.Drawing.Point(75, 186);
             this.priorityComboBox.Name = "priorityComboBox";
-            this.priorityComboBox.Size = new System.Drawing.Size(111, 21);
+            this.priorityComboBox.Size = new System.Drawing.Size(127, 21);
             this.priorityComboBox.TabIndex = 15;
             // 
             // label7
@@ -202,9 +202,9 @@
             this.visualCheckbox.AutoSize = true;
             this.visualCheckbox.Location = new System.Drawing.Point(116, 233);
             this.visualCheckbox.Name = "visualCheckbox";
-            this.visualCheckbox.Size = new System.Drawing.Size(66, 17);
+            this.visualCheckbox.Size = new System.Drawing.Size(86, 17);
             this.visualCheckbox.TabIndex = 20;
-            this.visualCheckbox.Text = "Окошко";
+            this.visualCheckbox.Text = "Визуальное";
             this.visualCheckbox.UseVisualStyleBackColor = true;
             // 
             // repeatTimePicker

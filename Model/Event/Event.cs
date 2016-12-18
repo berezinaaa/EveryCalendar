@@ -16,12 +16,6 @@ namespace Model
     [Serializable]
     public class Event
     {
-        string title;
-        TimeSpan startTime;
-        TimeSpan endTime;
-        DateTime day;
-
-
         public string Title { get; set; }
         public string Description { get; set; }
         public TimeSpan StartTime { get; set; }
@@ -68,7 +62,7 @@ namespace Model
             get
             {
                 return "Напоминание о событии " + Title + "\n Время: " + 
-                    timeString(StartTime) + " - " + timeString(endTime);
+                    timeString(StartTime) + " - " + timeString(EndTime);
             }
         }
 

@@ -57,7 +57,7 @@ namespace Model
         {
             try
             {
-                this.client = new TelegramClient(80415, "96eafd6fc118d9cc520147a841aa5a93");
+                this.client = new TelegramClient(75558, "ab4f6bacb2ef3ee86d97cd53f8bb1a70");
                 await client.ConnectAsync();
                 this.phone = phone;
                 this.hash = await client.SendCodeRequestAsync(phone);

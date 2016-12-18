@@ -51,12 +51,17 @@ namespace Model
 
         public void CheckEvents()
         {
+            Console.WriteLine(DateTime.Now.Hour);
+            Console.WriteLine(DateTime.Now.Minute);
             var todayEvents = EventsForDate(DateTime.Now.Date);
+           
 
             foreach (Event e in todayEvents)
             {
                 if (e.ShouldNotify)
                 {
+                    Console.WriteLine(DateTime.Now.Hour);
+                    Console.WriteLine(DateTime.Now.Minute);
                     e.Notify();
                 }
             }

@@ -35,17 +35,21 @@ namespace Model
 
         public override void Notify()
         {
-            base.Notify();
-            isNotified = false;
-            
             foreach (TimeSpan repeat in repeats)
             {
                 var now = DateTime.Now;
                 if (now.Minute == repeat.Minutes && now.Hour == repeat.Hours)
+                {
+                    base.Notify();
+                    isNotified = false;
                     return;
+                }
             }
 
-            isNotified = true;
+            if (DateTime.Now >= Day.Add(EndTime))
+            {
+                isNotified = true;
+            }
         }
     }
 }

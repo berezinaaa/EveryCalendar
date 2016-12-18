@@ -107,5 +107,11 @@ namespace UI
         {
             manager.CheckEvents();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var form = new TelegramLoginForm();
+            form.ShowDialog();
+        }
     }
 }

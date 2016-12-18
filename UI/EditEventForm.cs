@@ -15,7 +15,6 @@ namespace UI
     public partial class EditEventForm : Form
     {
         private Event ev;
-       // private MainForm owner;
         bool isEditMode;
         private UIModel.UIWeek week;
         // add new event mode
@@ -24,6 +23,9 @@ namespace UI
             InitializeComponent();
             isEditMode = false;
             this.week = week;
+            button1.Enabled = false;
+            button1.Visible = false;
+            completeButton.Text = "Добавить";
             //this.owner = owner;
         }
 
@@ -42,7 +44,8 @@ namespace UI
             descriptionTextBox.Text = ev.Description;
 
             priorityComboBox.SelectedIndex = (int)ev.Priority;
-
+            completeButton.Text = "Изменить";
+            button1.Text = "Удалить";
             //TODO: notifications
         }
 
@@ -118,6 +121,13 @@ namespace UI
                 EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
                 week.pictureBox);
             week.Draw();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var manager = EventManager.GetInstance();
+            manager.Remove(ev);
+            this.Close();
         }
     }
 }

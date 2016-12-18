@@ -49,6 +49,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.repeatCheckbox = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleTextBox
@@ -190,9 +191,9 @@
             // 
             // completeButton
             // 
-            this.completeButton.Location = new System.Drawing.Point(15, 367);
+            this.completeButton.Location = new System.Drawing.Point(162, 367);
             this.completeButton.Name = "completeButton";
-            this.completeButton.Size = new System.Drawing.Size(264, 24);
+            this.completeButton.Size = new System.Drawing.Size(111, 24);
             this.completeButton.TabIndex = 19;
             this.completeButton.UseVisualStyleBackColor = true;
             this.completeButton.Click += new System.EventHandler(this.completeButton_Click);
@@ -246,11 +247,22 @@
             this.label8.TabIndex = 26;
             this.label8.Text = "Уведомления";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 368);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(111, 23);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EditEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 403);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.repeatCheckbox);
             this.Controls.Add(this.label9);
@@ -304,5 +316,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox repeatCheckbox;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button1;
     }
 }

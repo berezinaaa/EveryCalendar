@@ -13,20 +13,22 @@ namespace UI
 {
     public partial class EditEventForm : Form
     {
-        Event ev;
+        private Event ev;
         bool isEditMode;
-
+        private UIModel.UIWeek week;
         // add new event mode
-        public EditEventForm()
+        public EditEventForm(UIModel.UIWeek week)
         {
             InitializeComponent();
             isEditMode = false;
+            this.week = week;
         }
 
         // edit event mode  
-        public EditEventForm(Event ev): base()
+        public EditEventForm(Event ev, UIModel.UIWeek week) : base()
         {
             InitializeComponent();
+            this.week = week;
             isEditMode = true;
             this.ev = ev;
             titleTextBox.Text = ev.Title;
@@ -81,6 +83,11 @@ namespace UI
             this.Close();
             
             //TODO: notifications 
+        }
+
+        private void EditEventForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            week.Draw();
         }
     }
 }

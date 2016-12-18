@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace UI.UIModel
 {
-    class Border
+    public class Border
     {
         public Point topLeftPoint { get; set; }
         public Point topRightPoint { get; set; }

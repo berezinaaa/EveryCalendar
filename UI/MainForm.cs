@@ -34,7 +34,7 @@ namespace UI
             flowLayoutPanel1.Controls.Add(pictureBox);
             pictureBox.MouseDoubleClick += new MouseEventHandler(pictureBox1DoubleClick);
             week = new UIModel.UIWeek(new UIModel.Border(0, 0,
-                pictureBox.Width, pictureBox.Height), fillDay());
+                pictureBox.Width, pictureBox.Height), fillDay(), Graphics.FromImage(pictureBox.Image));
             DrawCalendar(pictureBox);
         }
 
@@ -43,7 +43,7 @@ namespace UI
             MouseEventArgs me = (MouseEventArgs)e;
             Point coordinates = me.Location;
             week.clicked(coordinates, (ev) => {
-                var editForm = new EditEventForm(ev);
+                var editForm = new EditEventForm(ev, week);
                 editForm.ShowDialog();
             });
 
@@ -73,7 +73,7 @@ namespace UI
 
         private void DrawCalendar(PictureBox pictureBox)
         {
-            week.Draw(Graphics.FromImage(pictureBox.Image));
+            week.Draw();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var editForm = new EditEventForm();
+            var editForm = new EditEventForm(week);
             editForm.ShowDialog();
         }
     }

@@ -215,6 +215,7 @@
             this.Controls.Add(this.titleTextBox);
             this.Name = "EditEventForm";
             this.Text = "EditEventForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditEventForm_FormClosed);
             this.Load += new System.EventHandler(this.EditEventForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

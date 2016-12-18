@@ -8,18 +8,18 @@ using System.Drawing;
 using Model;
 namespace UI.UIModel
 {
-    class UIWeek
+    public class UIWeek
     {
         public Border border { get; set; }
         private List<UIDay> uiDays;
         private TimeList timeList;
         private DayList dayList;
-
-        public UIWeek(Border border, Dictionary<DateTime, List<Event>> events)
+        private Graphics e;
+        public UIWeek(Border border, Dictionary<DateTime, List<Event>> events, Graphics e)
         {
             this.border = border;
             uiDays = new List<UIDay>();
-
+            this.e = e;
             float indentX = border.width / 10.0f;
             float indentY = border.height / 15.0f;
             timeList = new TimeList(new Border(border.topLeftPoint.X, (int)indentY, border.width / 10,
@@ -54,7 +54,7 @@ namespace UI.UIModel
             }
         }
 
-        public void Draw(Graphics e)
+        public void Draw()
         {
             e.Clear(Color.White);
             DrawLines(e);

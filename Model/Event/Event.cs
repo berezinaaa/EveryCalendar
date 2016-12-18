@@ -62,6 +62,9 @@ namespace Model
             get
             {
                 var now = DateTime.Now;
+                var nowTime = now.TimeOfDay;
+                var date = now.Date;
+
                 return now.Date == this.Day.Date &&
                     now.TimeOfDay >= this.StartTime &&
                     now.TimeOfDay <= this.EndTime &&

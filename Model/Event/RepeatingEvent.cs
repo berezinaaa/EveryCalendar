@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class RepeatingEvent: Event
+    public class RepeatingEvent: Event
     {
-        TimeSpan Interval { get; set; }
+        public TimeSpan Interval { get; set; }
         protected int maxRepeatingCount;
         protected int repeatingCount;
 

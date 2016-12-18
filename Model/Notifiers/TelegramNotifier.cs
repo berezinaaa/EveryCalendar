@@ -9,9 +9,9 @@ using TeleSharp.TL;
 
 namespace Model
 {
-    public class TelegramNotifier
+    public class TelegramNotifier: IEventNotifier
     {
-        void Notify(Event calendarEvent)
+        public void Notify(Event calendarEvent)
         {
             var telegram = TelegramManager.GetInstance();
             telegram.SendMessage(calendarEvent.NotificationMessage);

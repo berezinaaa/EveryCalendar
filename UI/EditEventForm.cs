@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
+using Model.Notifiers;
 
 namespace UI
 {
@@ -49,7 +50,16 @@ namespace UI
         {
             if (!isEditMode)
             {
-                this.ev = new Event();
+                if (repeatCheckbox.Checked)
+                {
+                    var repeatingEvent = new RepeatingEvent();
+                    repeatingEvent.Interval = repeatTimePicker.Value.TimeOfDay;
+                    this.ev = repeatingEvent;
+                }
+                else
+                {
+                    this.ev = new Event();
+                }
             }
 
             ev.Title = titleTextBox.Text;
@@ -70,6 +80,22 @@ namespace UI
                     ev.Priority = EventPriority.High;
                     break;
             }
+
+            var notifiers = new List<IEventNotifier>();
+
+            if (visualCheckbox.Checked)
+            {
+                notifiers.Add(new VisualNotifier());
+            }
+            if (telegramCheckBox.Checked)
+            {
+                notifiers.Add(new TelegramNotifier());
+            }
+            if (smsCheckBox.Checked)
+            {
+                notifiers.Add(new SmsNotifier());
+            }
+            ev.Notifiers = notifiers;
 
             var context = EventContext.GetInstance();
             if (!isEditMode)

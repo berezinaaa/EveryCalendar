@@ -20,6 +20,7 @@ namespace UI
             InitializeComponent();
 
             context = EventContext.GetInstance();
+            timer.Enabled = true;
         }
 
         private void MainForm_Load(object sender, EventArgs e)

@@ -47,7 +47,7 @@
             this.visualCheckbox = new System.Windows.Forms.CheckBox();
             this.repeatTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.repeatCheckbox = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -227,15 +227,15 @@
             this.label9.TabIndex = 24;
             this.label9.Text = "с интервалом";
             // 
-            // checkBox2
+            // repeatCheckbox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(17, 327);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(80, 17);
-            this.checkBox2.TabIndex = 25;
-            this.checkBox2.Text = "Повторять";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.repeatCheckbox.AutoSize = true;
+            this.repeatCheckbox.Location = new System.Drawing.Point(17, 327);
+            this.repeatCheckbox.Name = "repeatCheckbox";
+            this.repeatCheckbox.Size = new System.Drawing.Size(80, 17);
+            this.repeatCheckbox.TabIndex = 25;
+            this.repeatCheckbox.Text = "Повторять";
+            this.repeatCheckbox.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -252,7 +252,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 403);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.repeatCheckbox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.repeatTimePicker);
             this.Controls.Add(this.visualCheckbox);
@@ -301,7 +301,7 @@
         private System.Windows.Forms.CheckBox visualCheckbox;
         private System.Windows.Forms.DateTimePicker repeatTimePicker;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox repeatCheckbox;
         private System.Windows.Forms.Label label8;
     }
 }

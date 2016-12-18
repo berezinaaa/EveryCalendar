@@ -15,90 +15,43 @@ namespace UI
     public partial class EditEventForm : Form
     {
         private Event ev;
-        private MainForm owner;
         bool isEditMode;
         private UIModel.UIWeek week;
         // add new event mode
-        public EditEventForm(UIModel.UIWeek week, MainForm owner)
+        public EditEventForm(UIModel.UIWeek week)
         {
             InitializeComponent();
             isEditMode = false;
             this.week = week;
-            this.owner = owner;
-
+            button1.Enabled = false;
+            button1.Visible = false;
             completeButton.Text = "Добавить";
-            this.Text = "Добавить новое событие";
+            //this.owner = owner;
         }
 
         // edit event mode  
-        public EditEventForm(Event ev, UIModel.UIWeek week)
+        public EditEventForm(Event ev, UIModel.UIWeek week) : base()
         {
             InitializeComponent();
             this.week = week;
             isEditMode = true;
             this.ev = ev;
-
-            Fill(ev);
-
-            this.Text = "Редактирование события";
-            completeButton.Text = "Редактировать";
-            //TODO: notifications
-        }
-
-        private void Fill(Event ev)
-        {
             titleTextBox.Text = ev.Title;
-            var day = ev.Day;
+            var day = ev.Day; 
             startTimePicker.Value = day.AddSeconds(ev.StartTime.TotalSeconds);
             endTimePicker.Value = day.AddSeconds(ev.EndTime.TotalSeconds);
             dayPicker.Value = day;
             descriptionTextBox.Text = ev.Description;
 
             priorityComboBox.SelectedIndex = (int)ev.Priority;
-
-            bool visual = false;
-            bool telegram = false;
-            bool sms = false;
-
-            foreach(IEventNotifier notifier in ev.Notifiers)
-            {
-                if (notifier is SmsNotifier)
-                {
-                    sms = true;
-                }
-                if (notifier is TelegramNotifier)
-                {
-                    telegram = true;
-                }
-                if (notifier is VisualNotifier)
-                {
-                    visual = true;
-                }
-            }
-
-            visualCheckbox.Checked = visual;
-            smsCheckBox.Checked = sms;
-            telegramCheckBox.Checked = telegram;
-
-            if (ev is RepeatingEvent)
-            {
-                var e = (RepeatingEvent)ev;
-                repeatCheckbox.Checked = true;
-                repeatTimePicker.Value = day.AddSeconds(e.Interval.TotalSeconds);
-            }
-            else
-            {
-                repeatCheckbox.Checked = false;
-            }
+            completeButton.Text = "Изменить";
+            button1.Text = "Удалить";
+            //TODO: notifications
         }
 
         private void EditEventForm_Load(object sender, EventArgs e)
         {
-            var telegram = TelegramManager.GetInstance();
-            if (!telegram.isLogin)
-            {
-                telegramCheckBox.Enabled = false;
-            }
+            
         }
 
         private void completeButton_Click(object sender, EventArgs e)
@@ -144,28 +97,22 @@ namespace UI
                 manager.Remove(ev);
             }
 
-            try
+            if (repeatCheckbox.Checked)
             {
-                if (repeatCheckbox.Checked)
-                {
-                    var interval = repeatTimePicker.Value.TimeOfDay;
-                    ev = new RepeatingEvent(title, description, startTime, endTime, day,
-                                                            priority, interval, notifiers);
-                }
-                else
-                {
-                    ev = new Event(title, description, startTime, endTime, day,
-                                                            priority, notifiers);
-                }
-
-                manager.Add(ev);
-
-                this.Close();
+                var interval = repeatTimePicker.Value.TimeOfDay;
+                ev = new RepeatingEvent(title, description, startTime, endTime, day,
+                                                        priority, interval, notifiers);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "Ошибка");
+                ev = new Event(title, description, startTime, endTime, day,
+                                                        priority, notifiers);
             }
+
+            
+            manager.Add(ev);
+            
+            this.Close();
         }
 
         private void EditEventForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -174,6 +121,13 @@ namespace UI
                 EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
                 week.pictureBox);
             week.Draw();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var manager = EventManager.GetInstance();
+            manager.Remove(ev);
+            this.Close();
         }
     }
 }

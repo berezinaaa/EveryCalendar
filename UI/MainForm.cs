@@ -23,6 +23,8 @@ namespace UI
             manager = EventManager.GetInstance();
             timer1.Enabled = true;
             doSomething();
+            button2.Text = "Назад";
+            button3.Text = "Далее";
         }
 
         public void doSomething()
@@ -34,7 +36,7 @@ namespace UI
             flowLayoutPanel1.Controls.Add(pictureBox);
             pictureBox.MouseDoubleClick += new MouseEventHandler(pictureBox1DoubleClick);
             week = new UIModel.UIWeek(new UIModel.Border(0, 0,
-                pictureBox.Width, pictureBox.Height), fillDay(), pictureBox);
+                pictureBox.Width, pictureBox.Height), manager.WeekEventsFromStartDate(DateTime.Today) , pictureBox);
             DrawCalendar();
         }
 
@@ -53,35 +55,17 @@ namespace UI
         private void EditFrom_FormClosing(object sender, FormClosingEventArgs e)
         {
             DrawCalendar();
+            week = new UIModel.UIWeek(week.border, 
+            manager.WeekEventsFromStartDate(week.startDay), week.pictureBox);
         }
 
-        //TODO: DELETE
-        public Dictionary<DateTime, List<Event>> fillDay()
-        {
-            Dictionary<DateTime, List<Event>> res = new Dictionary<DateTime, List<Event>>();
-            for (int i = 0; i < 7; i++)
-            {
-                List<Event> ev = new List<Event>();
-                TimeSpan startTime = new TimeSpan(11, 30, 0);
-                TimeSpan endTime = new TimeSpan(15, 30, 0);
-                ev.Add(new Event("Проснуться", "Очень рано, но не слишком", startTime, endTime,
-                    DateTime.Today, EventPriority.High, new List<IEventNotifier>()));
-                endTime = new TimeSpan(18, 30, 0);
-                ev.Add(new Event("Проснуться", "Очень рано, но не слишком очень много текстафываофдылвжаофывдлаофыдвлаофывджлаофыдвлафывафыва", startTime, endTime,
-                    DateTime.Today, EventPriority.High, new List<IEventNotifier>()));
-
-                DateTime date = DateTime.Today;
-                res.Add(date.AddDays(i), ev);
-            }
-
-            return res;
-        }
+       
 
         private void DrawCalendar()
         {
-            week = new UIModel.UIWeek(week.border,
-                EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
-                week.pictureBox);
+            //week = new UIModel.UIWeek(week.border,
+             //   EventManager.GetInstance().WeekEventsFromStartDate(week.startDay),
+              //  week.pictureBox);
             week.Draw();
         }
 
@@ -94,7 +78,7 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var editForm = new EditEventForm(week, this);
+            var editForm = new EditEventForm(week);
             editForm.ShowDialog();
         }
 
@@ -108,10 +92,32 @@ namespace UI
             manager.CheckEvents();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            var form = new TelegramLoginForm();
-            form.ShowDialog();
+            DateTime day = week.startDay;
+            day = day.AddDays(-7);
+            week = new UIModel.UIWeek(week.border,
+                EventManager.GetInstance().WeekEventsFromStartDate(day),
+                week.pictureBox);
+            DrawCalendar();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DateTime day = week.startDay;
+            day = day.AddDays(7);
+            week = new UIModel.UIWeek(week.border,
+                EventManager.GetInstance().WeekEventsFromStartDate(day),
+                week.pictureBox);
+            DrawCalendar();
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            week = new UIModel.UIWeek(week.border,
+                EventManager.GetInstance().WeekEventsFromStartDate(monthCalendar1.SelectionRange.Start),
+                week.pictureBox);
+            DrawCalendar();
         }
     }
 }

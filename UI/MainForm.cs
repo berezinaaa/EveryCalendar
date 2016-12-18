@@ -119,5 +119,11 @@ namespace UI
                 week.pictureBox);
             DrawCalendar();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var form = new TelegramLoginForm();
+            form.ShowDialog();
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace UI
             {
                 if (!success)
                 {
-                    MessageBox.Show(message, "Ошибка");
+                    MessageBox.Show("Попробуйте еще раз", "Ошибка");
                 }
             };
         }
@@ -86,7 +86,7 @@ namespace UI
 
         private void ShowError(string message)
         {
-            MessageBox.Show(message, "Ошибка");
+            MessageBox.Show("Попробуйте еще раз", "Ошибка");
         }
     }
 }

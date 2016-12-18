@@ -26,6 +26,8 @@ namespace UI
             button1.Enabled = false;
             button1.Visible = false;
             completeButton.Text = "Добавить";
+            Text = "Новое событие";
+            priorityComboBox.SelectedIndex = 1;
             //this.owner = owner;
         }
 
@@ -36,17 +38,66 @@ namespace UI
             this.week = week;
             isEditMode = true;
             this.ev = ev;
+
+            Fill(ev);
+
+            priorityComboBox.SelectedIndex = (int)ev.Priority;
+            completeButton.Text = "Изменить";
+            button1.Text = "Удалить";
+            Text = "Редактирование события";
+            //TODO: notifications
+        }
+
+        private void Fill(Event ev)
+        {
             titleTextBox.Text = ev.Title;
-            var day = ev.Day; 
+            var day = ev.Day;
             startTimePicker.Value = day.AddSeconds(ev.StartTime.TotalSeconds);
             endTimePicker.Value = day.AddSeconds(ev.EndTime.TotalSeconds);
             dayPicker.Value = day;
             descriptionTextBox.Text = ev.Description;
 
             priorityComboBox.SelectedIndex = (int)ev.Priority;
-            completeButton.Text = "Изменить";
-            button1.Text = "Удалить";
-            //TODO: notifications
+
+            bool visual = false;
+            bool telegram = false;
+            bool sms = false;
+
+            foreach (IEventNotifier notifier in ev.Notifiers)
+            {
+                if (notifier is SmsNotifier)
+                {
+                    sms = true;
+                }
+                if (notifier is TelegramNotifier)
+                {
+                    telegram = true;
+                }
+                if (notifier is VisualNotifier)
+                {
+                    visual = true;
+                }
+            }
+
+            if (!TelegramManager.GetInstance().isLogin)
+            {
+                telegramCheckBox.Enabled = false;
+            }
+
+            visualCheckbox.Checked = visual;
+            smsCheckBox.Checked = sms;
+            telegramCheckBox.Checked = telegram;
+
+            if (ev is RepeatingEvent)
+            {
+                var e = (RepeatingEvent)ev;
+                repeatCheckbox.Checked = true;
+                repeatTimePicker.Value = day.AddSeconds(e.Interval.TotalSeconds);
+            }
+            else
+            {
+                repeatCheckbox.Checked = false;
+            }
         }
 
         private void EditEventForm_Load(object sender, EventArgs e)
@@ -97,22 +148,28 @@ namespace UI
                 manager.Remove(ev);
             }
 
-            if (repeatCheckbox.Checked)
+            try
             {
-                var interval = repeatTimePicker.Value.TimeOfDay;
-                ev = new RepeatingEvent(title, description, startTime, endTime, day,
-                                                        priority, interval, notifiers);
-            }
-            else
-            {
-                ev = new Event(title, description, startTime, endTime, day,
-                                                        priority, notifiers);
-            }
+                if (repeatCheckbox.Checked)
+                {
+                    var interval = repeatTimePicker.Value.TimeOfDay;
+                    ev = new RepeatingEvent(title, description, startTime, endTime, day,
+                                                            priority, interval, notifiers);
+                }
+                else
+                {
+                    ev = new Event(title, description, startTime, endTime, day,
+                                                            priority, notifiers);
+                }
 
-            
-            manager.Add(ev);
-            
-            this.Close();
+                manager.Add(ev);
+
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
         }
 
         private void EditEventForm_FormClosed(object sender, FormClosedEventArgs e)

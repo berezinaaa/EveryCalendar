@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TLSharp;
 using TLSharp.Core;
 using TeleSharp.TL;
+using System.Threading;
 
 namespace Model
 {
@@ -59,6 +60,7 @@ namespace Model
             {
                 this.client = new TelegramClient(75558, "ab4f6bacb2ef3ee86d97cd53f8bb1a70");
                 await client.ConnectAsync();
+                Thread.Sleep(1000);
                 this.phone = phone;
                 this.hash = await client.SendCodeRequestAsync(phone);
                 callback(true, null);

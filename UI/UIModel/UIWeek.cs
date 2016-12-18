@@ -76,11 +76,9 @@ namespace UI.UIModel
             float rectHeight = timeList.border.height / 24.0f;
             for (int i = 0; i < 24; i++)
             {
-                Color c = Color.SaddleBrown;
-                if (i % 2 == 1)
-                {
-                    c = Color.Gray;
-                }
+                Color c = Color.LightGray;
+                if (i % 2 == 1) { c = Color.LightBlue; }
+
                 e.FillRectangle(new SolidBrush(c),
                  
                     new RectangleF(border.topLeftPoint.X, timeList.border.topLeftPoint.Y + i * rectHeight, border.width, rectHeight));

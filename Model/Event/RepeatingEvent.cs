@@ -18,7 +18,7 @@ namespace Model
             DateTime day, EventPriority priority, TimeSpan interval, List<IEventNotifier> notifiers): 
             base(title, descr, start, end, day, priority, notifiers)
         {
-            if (interval.TotalMinutes < 0)
+            if (interval.TotalMinutes < 5)
             {
                 throw new Exception("Время повтора не должно быть меньше 5 минут!");
             }

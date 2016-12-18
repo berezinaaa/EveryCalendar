@@ -25,6 +25,9 @@ namespace UI.UIModel
             for (int i = 0; i < days.Count; i++)
             {
                 StringFormat sf = new StringFormat();
+                String format = "dd/MM/yyyy";
+                String str = days[i].date.Date.DayOfWeek.ToString() + "\n" 
+                    + days[i].date.Date.ToString(format);
                 sf.LineAlignment = StringAlignment.Center;
                 sf.Alignment = StringAlignment.Center;
                 Font font = new Font("Arial", border.height / 2.5f, GraphicsUnit.Pixel);
@@ -34,7 +37,7 @@ namespace UI.UIModel
 
                 RectangleF rect = new RectangleF((float)days[i].border.topLeftPoint.X,
                     (float)border.topLeftPoint.Y, border.width / 7.0f, (float)border.height);
-                e.DrawString(days[i].date.Date.ToString(), font, Brushes.Black, rect, sf);
+                e.DrawString(str, font, Brushes.Black, rect, sf);
             }
         }
     }

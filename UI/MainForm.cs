@@ -111,5 +111,13 @@ namespace UI
                 week.pictureBox);
             DrawCalendar();
         }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            week = new UIModel.UIWeek(week.border,
+                EventManager.GetInstance().WeekEventsFromStartDate(monthCalendar1.SelectionRange.Start),
+                week.pictureBox);
+            DrawCalendar();
+        }
     }
 }

@@ -53,9 +53,6 @@ namespace Model
             Notifiers = notifiers;
         }
 
-        public EventDataSource DataSource() {
-            return new EventDataSource(this);
-        }
 
         public string NotificationMessage
         {
@@ -68,7 +65,8 @@ namespace Model
 
         private string timeString(TimeSpan span)
         {
-            return span.Hours + ":" + span.Minutes;
+            string minutes = span.Minutes >= 10 ? span.Minutes.ToString() : "0" + span.Minutes.ToString();
+            return span.Hours + ":" + minutes;
         }
 
         public bool ShouldNotify
@@ -93,25 +91,6 @@ namespace Model
             {
                 notifier.Notify(this);
             }
-        }
-    }
-
-    public class EventDataSource
-    {
-        private Event calendarEvent;
-         
-        public string Time
-        {
-            get
-            {
-                return calendarEvent.StartTime.ToString() + " - " + calendarEvent.EndTime.ToString();
-            }
-        }
-        public string Title { get { return calendarEvent.Title; } }
-
-        public EventDataSource(Event calendarEvent)
-        {
-            this.calendarEvent = calendarEvent;
         }
     }
 }

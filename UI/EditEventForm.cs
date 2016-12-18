@@ -82,10 +82,7 @@ namespace UI
                 }
             }
 
-            if (!TelegramManager.GetInstance().isLogin)
-            {
-                telegramCheckBox.Enabled = false;
-            }
+           
 
             visualCheckbox.Checked = visual;
             smsCheckBox.Checked = sms;
@@ -105,7 +102,10 @@ namespace UI
 
         private void EditEventForm_Load(object sender, EventArgs e)
         {
-            
+            if (!TelegramManager.GetInstance().isLogin)
+            {
+                telegramCheckBox.Enabled = false;
+            }
         }
 
         private void completeButton_Click(object sender, EventArgs e)

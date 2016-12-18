@@ -26,7 +26,7 @@ namespace Model
         public EventPriority Priority { get; set; }
         public List<IEventNotifier> Notifiers { get; set; }
 
-        private bool isNotified;
+        protected bool isNotified;
 
         public Event()
         {
@@ -62,6 +62,9 @@ namespace Model
             get
             {
                 var now = DateTime.Now;
+                var nowTime = now.TimeOfDay;
+                var date = now.Date;
+
                 return now.Date == this.Day.Date &&
                     now.TimeOfDay >= this.StartTime &&
                     now.TimeOfDay <= this.EndTime &&
@@ -69,7 +72,7 @@ namespace Model
             }
         }
 
-        public void Notify()
+        virtual public void Notify()
         {
             isNotified = true;
             foreach (IEventNotifier notifier in Notifiers)

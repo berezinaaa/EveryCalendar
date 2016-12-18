@@ -44,6 +44,11 @@
             this.telegramCheckBox = new System.Windows.Forms.CheckBox();
             this.smsCheckBox = new System.Windows.Forms.CheckBox();
             this.completeButton = new System.Windows.Forms.Button();
+            this.visualCheckbox = new System.Windows.Forms.CheckBox();
+            this.repeatTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.repeatCheckbox = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titleTextBox
@@ -166,7 +171,7 @@
             // telegramCheckBox
             // 
             this.telegramCheckBox.AutoSize = true;
-            this.telegramCheckBox.Location = new System.Drawing.Point(12, 223);
+            this.telegramCheckBox.Location = new System.Drawing.Point(116, 256);
             this.telegramCheckBox.Name = "telegramCheckBox";
             this.telegramCheckBox.Size = new System.Drawing.Size(70, 17);
             this.telegramCheckBox.TabIndex = 17;
@@ -176,7 +181,7 @@
             // smsCheckBox
             // 
             this.smsCheckBox.AutoSize = true;
-            this.smsCheckBox.Location = new System.Drawing.Point(12, 246);
+            this.smsCheckBox.Location = new System.Drawing.Point(116, 279);
             this.smsCheckBox.Name = "smsCheckBox";
             this.smsCheckBox.Size = new System.Drawing.Size(49, 17);
             this.smsCheckBox.TabIndex = 18;
@@ -185,18 +190,72 @@
             // 
             // completeButton
             // 
-            this.completeButton.Location = new System.Drawing.Point(12, 326);
+            this.completeButton.Location = new System.Drawing.Point(15, 367);
             this.completeButton.Name = "completeButton";
-            this.completeButton.Size = new System.Drawing.Size(261, 24);
+            this.completeButton.Size = new System.Drawing.Size(264, 24);
             this.completeButton.TabIndex = 19;
             this.completeButton.UseVisualStyleBackColor = true;
             this.completeButton.Click += new System.EventHandler(this.completeButton_Click);
+            // 
+            // visualCheckbox
+            // 
+            this.visualCheckbox.AutoSize = true;
+            this.visualCheckbox.Location = new System.Drawing.Point(116, 233);
+            this.visualCheckbox.Name = "visualCheckbox";
+            this.visualCheckbox.Size = new System.Drawing.Size(66, 17);
+            this.visualCheckbox.TabIndex = 20;
+            this.visualCheckbox.Text = "Окошко";
+            this.visualCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // repeatTimePicker
+            // 
+            this.repeatTimePicker.CustomFormat = "HH:mm";
+            this.repeatTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.repeatTimePicker.Location = new System.Drawing.Point(97, 341);
+            this.repeatTimePicker.Name = "repeatTimePicker";
+            this.repeatTimePicker.ShowUpDown = true;
+            this.repeatTimePicker.Size = new System.Drawing.Size(182, 20);
+            this.repeatTimePicker.TabIndex = 22;
+            this.repeatTimePicker.Value = new System.DateTime(2016, 12, 18, 0, 10, 0, 0);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(14, 347);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "с интервалом";
+            // 
+            // repeatCheckbox
+            // 
+            this.repeatCheckbox.AutoSize = true;
+            this.repeatCheckbox.Location = new System.Drawing.Point(17, 327);
+            this.repeatCheckbox.Name = "repeatCheckbox";
+            this.repeatCheckbox.Size = new System.Drawing.Size(80, 17);
+            this.repeatCheckbox.TabIndex = 25;
+            this.repeatCheckbox.Text = "Повторять";
+            this.repeatCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(14, 233);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 13);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Уведомления";
             // 
             // EditEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(285, 362);
+            this.ClientSize = new System.Drawing.Size(285, 403);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.repeatCheckbox);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.repeatTimePicker);
+            this.Controls.Add(this.visualCheckbox);
             this.Controls.Add(this.completeButton);
             this.Controls.Add(this.smsCheckBox);
             this.Controls.Add(this.telegramCheckBox);
@@ -240,5 +299,10 @@
         private System.Windows.Forms.CheckBox telegramCheckBox;
         private System.Windows.Forms.CheckBox smsCheckBox;
         private System.Windows.Forms.Button completeButton;
+        private System.Windows.Forms.CheckBox visualCheckbox;
+        private System.Windows.Forms.DateTimePicker repeatTimePicker;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox repeatCheckbox;
+        private System.Windows.Forms.Label label8;
     }
 }

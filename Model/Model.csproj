@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event\Event.cs" />
-    <Compile Include="EventContext.cs" />
+    <Compile Include="EventManager.cs" />
     <Compile Include="Notifiers\IEventNotifier.cs" />
     <Compile Include="Notifiers\VisualNotifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

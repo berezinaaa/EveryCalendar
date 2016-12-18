@@ -100,10 +100,10 @@ namespace UI
             }
             ev.Notifiers = notifiers;
 
-            var context = EventContext.GetInstance();
+            var manager = EventManager.GetInstance();
             if (!isEditMode)
             {
-                context.Add(ev);
+                manager.Add(ev);
             }
 
             this.Close();

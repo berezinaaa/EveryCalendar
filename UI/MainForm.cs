@@ -13,14 +13,14 @@ namespace UI
 {
     public partial class MainForm : Form
     {
-        private EventContext context;
+        private EventManager manager;
         private UIModel.UIWeek week;
 
         public MainForm()
         {
             InitializeComponent();
 
-            context = EventContext.GetInstance();
+            manager = EventManager.GetInstance();
 
             doSomething();
         }

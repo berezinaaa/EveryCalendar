@@ -15,9 +15,6 @@ namespace Model
 
     public class Event
     {
-        [Key]
-        public int eventId { get; set; }
-        
         public string Title { get; set; }
         public string Description { get; set; }
         public TimeSpan StartTime { get; set; }
